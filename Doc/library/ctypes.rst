@@ -1584,6 +1584,14 @@ way is to instantiate :py:class:`CDLL` or one of its subclasses:
    they are not added automatically.
    See :ref:`ctypes-finding-shared-libraries` for more information.
 
+   On macOS, when *handle* is ``None``, :class:`!CDLL` uses the search
+   rules described in the macOS ``dlopen(3)`` manual page. For example,
+   the dynamic loader may skip fallback directories such as
+   :file:`/usr/local/lib` for libraries and :file:`/Library/Frameworks`
+   for frameworks. This can affect Python installed from python.org.
+   To load a library or framework from a known location, pass its
+   absolute path as *name*.
+
    On non-Windows systems, *name* can  be ``None``. In this case,
    :c:func:`!dlopen` is called with ``NULL``, which opens the main program
    as a "library".
